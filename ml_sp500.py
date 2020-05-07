@@ -4,7 +4,6 @@ from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split 
 
-
 import keras 
 import math 
 import tensorflow as tf 
@@ -18,7 +17,7 @@ from keras import optimizers
 from keras.preprocessing.sequence import TimeseriesGenerator
 import pandas_datareader as web
 
-#  df =web.DataReader('AAPL',data_source='yahoo',start='2020-01-01',end='2020-03-01')
+#  df =web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-05-07')
 
 
 
@@ -29,8 +28,11 @@ class StockData:
 
     def __init__(self):
 
-        self.data = pd.read_csv('sp500.csv')
-        self.history_data_pts = 100
+        #uncommnet if need 1998 -2020 data 
+        # self.data = pd.read_csv('sp500.csv')
+
+        self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-05-07')
+        self.history_data_pts = 60
         self.look_back = 15
         self.batch_size = 1
         self.scaler = MinMaxScaler(feature_range=(0,1))
