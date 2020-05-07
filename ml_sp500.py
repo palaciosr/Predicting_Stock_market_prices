@@ -16,12 +16,13 @@ from keras import optimizers
 
 #genererator
 from keras.preprocessing.sequence import TimeseriesGenerator
+import pandas_datareader as web
+
+#  df =web.DataReader('AAPL',data_source='yahoo',start='2020-01-01',end='2020-03-01')
 
 
 
 #need to document better 
-
-
 #number of days to train on
 
 class StockData:
@@ -178,57 +179,13 @@ class StockData:
 
 stock_data=StockData()
 
-date=stock_data.get_dates()
-list_prices=stock_data.predict_prices()
-print(list_prices)
+check_pred = stock_data().train_test_split_data()
+
+print(check_pred)
+
+# date=stock_data.get_dates()
+# list_prices=stock_data.predict_prices()
+# print(list_prices)
 
 
-print(date)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# print(date)
