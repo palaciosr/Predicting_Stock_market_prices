@@ -17,6 +17,9 @@ from keras import optimizers
 from keras.preprocessing.sequence import TimeseriesGenerator
 import pandas_datareader as web
 
+#for deploying
+#https://github.com/shekhargulati/python-flask-docker-hello-world/blob/master/Dockerfile
+
 #  df =web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-05-07')
 
 
