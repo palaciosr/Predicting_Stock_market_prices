@@ -21,9 +21,6 @@ import pandas_datareader as web
 
 
 
-#need to document better 
-#number of days to train on
-
 class StockData:
 
     def __init__(self):
@@ -31,6 +28,7 @@ class StockData:
         #uncommnet if need 1998 -2020 data 
         # self.data = pd.read_csv('sp500.csv')
 
+#we are using the stock data from pandas data reader library to extract data 
         self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-05-07')
         self.history_data_pts = 60
         self.look_back = 15
@@ -54,7 +52,8 @@ class StockData:
 
 
     
-#splitting data
+#splitting data this is for the deep learning portion whereby we have to split the data 
+#into test and training data sets 
     def train_test_split_data(self):
 
         data_no_date = StockData().drop_date()
@@ -70,11 +69,10 @@ class StockData:
         return X_train, X_test,y_train ,y_test
 
 
-    
+# here we envoke the Timeseries generator from keras deep learning framework     
     def generate_time_sequence(self):
         pass 
 
-#needs one variable of type series not multiple varables of type dataframe 
         data_no_date = StockData().drop_date()
 
         dataset = self.scaler.fit_transform(data_no_date)
@@ -132,7 +130,7 @@ class StockData:
         self.model.fit_generator(train_gen,epochs=num_epochs,verbose=1)
 
 
-
+#this will allow for the prices to be calculated looking forward for futures dates 
     def predict_prices(self):
 
         num_prediction = 15
