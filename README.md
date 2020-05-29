@@ -10,3 +10,5 @@ This project is to examine what LSTMs can do to predict stock market data. As th
 #Research 
 
 There are various articles, to which I will refer to later ,where they state that this deep learning model does not work. This is an exercise where I attempt to validate the results of others, as well as build a price generator with Keras.
+
+One way to measure what deep learning offers of value add is to simply see the statistics for the given stock(s) or index. I have included the folder "Stock_averages" as both a metric and for seeing if a holding strategy is better or buying and selling. 
