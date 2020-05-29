@@ -17,11 +17,14 @@ from keras import optimizers
 from keras.preprocessing.sequence import TimeseriesGenerator
 import pandas_datareader as web
 
-#for deploying
-#https://github.com/shekhargulati/python-flask-docker-hello-world/blob/master/Dockerfile
 
-#  df =web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-05-07')
 
+"""
+This class grabs the stock data with the pandas_datareader library
+It then uses Keras deep learning framework with long term short term memory
+in order to predict the future stock prices for the next (future) five days
+
+"""
 
 
 class StockData:
@@ -34,17 +37,22 @@ class StockData:
 #we are using the stock data from pandas data reader library to extract data 
         self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-05-07')
         self.history_data_pts = 60
-        self.look_back = 15
+        self.look_back = 5
         self.batch_size = 1
         self.scaler = MinMaxScaler(feature_range=(0,1))
         self.model = Sequential()
 
+    #when using and deep learning techniques we cannot accept the strings 
+    #note we can handle this with one-hot encoder 
     def drop_date(self):
 
         self.data_no_date = self.data.drop('Date',axis=1)
         
         return self.data_no_date
 
+    #I want to normalize the data in order to get returns and prices 
+    #I will include research which shows normal and log normal distributions
+    # for returns and price fluctations 
     def normalize_data(self):
 
         data_no_date = StockData().drop_date()
@@ -60,12 +68,11 @@ class StockData:
     def train_test_split_data(self):
 
         data_no_date = StockData().drop_date()
-                #   Open         High          Low        Close    Adj Close     Volume
+        #columns are below         
+        #Open,High ,Low ,Close, Adj Close,Volume
 
         X=data_no_date[['Open','High','Low','Volume']]
         y=data_no_date['Close']
-
-        # print(data_no_date.head(5))
 
         X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.25)
 
@@ -79,8 +86,6 @@ class StockData:
         data_no_date = StockData().drop_date()
 
         dataset = self.scaler.fit_transform(data_no_date)
-
-        # price_data = data_no_date['Close']
 
         train_size = math.floor(len(dataset)*0.7)
 
