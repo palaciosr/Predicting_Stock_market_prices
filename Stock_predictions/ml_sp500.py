@@ -22,19 +22,19 @@ import pandas_datareader as web
 """
 This class grabs the stock data with the pandas_datareader library
 It then uses Keras deep learning framework with long term short term memory
-in order to predict the future stock prices for the next (future) five days
+in order to predict the future stock prices for the next (future) five days.
+The amount of historical data that is taken for this experiment is 60 days.
 
 """
-
 
 class StockData:
 
     def __init__(self):
 
-        #uncommnet if need 1998 -2020 data 
-        # self.data = pd.read_csv('sp500.csv')
+        #uncommnet if you want a large data set from 1998-2020 
+        # self.data = pd.read_csv('../data/sp500.csv')
 
-#we are using the stock data from pandas data reader library to extract data 
+        #we are using the stock data from pandas data reader library to extract data 
         self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-05-07')
         self.history_data_pts = 60
         self.look_back = 5
@@ -91,9 +91,12 @@ class StockData:
 
         test_size = math.floor(len(dataset)-train_size)
 
+        #scaling the test and train data sets 
         train , test = dataset[0:train_size,:], dataset[train_size:len(dataset),:]
 
-
+        #Time series generator takes the train and test and uses it to generate future data 
+        #note that in its purest form the data generator is just generating data with 
+        #random generator native to python 
         train_gen = TimeseriesGenerator(train,train,self.look_back,batch_size=1)
         test_gen = TimeseriesGenerator(test,test,self.look_back,batch_size=1)
 
@@ -113,7 +116,6 @@ class StockData:
 
     def LSTM_model(self):
 
-        #check that the data splits as an int 
 
         split_percent =0.8
         num_epochs = 8
@@ -138,10 +140,12 @@ class StockData:
         self.model.fit_generator(train_gen,epochs=num_epochs,verbose=1)
 
 
-#this will allow for the prices to be calculated looking forward for futures dates 
+#this will allow for the prices to be calculated looking forward for futures dates
+#note I am using the Close stock prices but there can be a variation of times to 
+#do prediction on 
     def predict_prices(self):
 
-        num_prediction = 15
+        num_prediction = 5
 
 
         data_no_date = StockData().drop_date()
@@ -169,7 +173,7 @@ class StockData:
     def get_dates(self):
 
         split_percent =0.8
-        num_prediction = 15 
+        num_prediction = 5
 
         date = self.data['Date']
         split = int(split_percent*len(date))
@@ -190,6 +194,8 @@ stock_data=StockData()
 check_pred = stock_data().train_test_split_data()
 
 print(check_pred)
+
+#below will give the future prices and dates 
 
 # date=stock_data.get_dates()
 # list_prices=stock_data.predict_prices()
