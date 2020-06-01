@@ -160,6 +160,8 @@ class StockData:
             x = prediction_list[-self.look_back:]
             x = x.reshape((1,self.look_back,1))
 
+            #using the predict method from keras to generate the predicted values 
+
             out = self.model.predict(x)[0][0]
 
             prediction_list = np.append(prediction_list,out)
