@@ -49,7 +49,7 @@ class MLPredictions:
         #would have to work with the max depth as there are not lots of features as of now 
 
 
-ml_pred= MLPredictions()
+# ml_pred= MLPredictions()
 
 """
 the prediction gives a 98% score we should be wary of this 
@@ -57,7 +57,7 @@ It is important to note that this is a backtest as opposed to a forward test
 the only way to make money is to forward test I will conduct further research
 
 """
-x= ml_pred.random_forest()
+# x= ml_pred.random_forest()
 
-print(x)
+# print(x)
 
