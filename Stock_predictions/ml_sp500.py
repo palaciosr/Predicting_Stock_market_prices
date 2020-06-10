@@ -45,6 +45,7 @@ class StockData:
     #when using and deep learning techniques we cannot accept the strings 
     #note we can handle this with one-hot encoder 
     def drop_date(self):
+        pass 
 
         self.data_no_date = self.data.drop('Date',axis=1)
         
@@ -67,12 +68,12 @@ class StockData:
 #into test and training data sets 
     def train_test_split_data(self):
 
-        data_no_date = StockData().drop_date()
+        # data_no_date = StockData().drop_date()
         #columns are below         
         #Open,High ,Low ,Close, Adj Close,Volume
 
-        X=data_no_date[['Open','High','Low','Volume']]
-        y=data_no_date['Close']
+        X=self.data[['Open','High','Low','Volume']]
+        y=self.data['Close']
 
         X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.25)
 
@@ -120,9 +121,9 @@ class StockData:
         split_percent =0.8
         num_epochs = 8
 
-        data_no_date = StockData().drop_date()
+        # data_no_date = StockData().drop_date()
 
-        close_price = data_no_date['Close'].values
+        close_price = self.data['Close'].values
 
         close_price = close_price.reshape((-1,1))
 
@@ -148,8 +149,9 @@ class StockData:
         num_prediction = 5
 
 
-        data_no_date = StockData().drop_date()
-        close_price = data_no_date['Close'].values
+        # data_no_date = StockData().drop_date()
+
+        close_price = self.data['Close'].values
 
         close_price = close_price.reshape((-1))
 
@@ -178,6 +180,9 @@ class StockData:
         num_prediction = 5
 
         date = self.data['Date']
+
+        date = self.data.set_index('Date',inplace=True)
+
         split = int(split_percent*len(date))
 
         date_train=date[:split]
@@ -193,15 +198,11 @@ class StockData:
 
 stock_data=StockData()
 
-check_pred = stock_data.train_test_split_data()
-
-print(check_pred)
-
 #below will give the future prices and dates 
 
-# date=stock_data.get_dates()
-# list_prices=stock_data.predict_prices()
-# print(list_prices)
+date=stock_data.get_dates()
+list_prices=stock_data.predict_prices()
+print(list_prices)
 
 
-# print(date)
+print(date)
