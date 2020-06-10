@@ -9,6 +9,8 @@ import matplotlib
 #we will try from Feb 2020 until where we see the COVID-19 effect 
 sp500 = yf.download('^GSPC',data_source='yahoo',start='2020-02-01',end='2020-06-09')
 
+#return equation is (P1-P0+Dividends)/P0
+
 #we want to get the log returns as this a metric that  'accurately' gives returns
 sp500['log_returns'] = np.log(sp500['Close']/sp500['Close'].shift(1))
 # print(sp500['log_returns'])
