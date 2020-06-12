@@ -50,7 +50,7 @@ def main():
 
     return x,y,z 
 
-main()
+# main()
 
 
 
