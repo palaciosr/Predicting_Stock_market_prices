@@ -33,7 +33,7 @@ def main():
 
     #lets get random prices for the next 5 days given the last 6 months
     print("Prices given the last 6 months randomly")
-    last_six_months(min_price_6_months,max_price_6_months)
+    x=last_six_months(min_price_6_months,max_price_6_months)
     print()
 
     data_2wks = web.DataReader('^GSPC',data_source='yahoo',start='2020-05-03',end='2020-06-05')
@@ -42,11 +42,13 @@ def main():
     max_price_2wks = data_2wks['Open'].max()
 
     print("Prices given the last 2 weeks randomly")
-    last_six_months(min_price_2wks,max_price_2wks)
+    y=last_2wks(min_price_2wks,max_price_2wks)
     print()
 
     print("The actual prices for the prices for the week of June 8, 2020 ")
-    actual_prices()
+    z=actual_prices()
+
+    return x,y,z 
 
 main()
 
