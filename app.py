@@ -1,16 +1,15 @@
-from flask import Flask 
+from flask import Flask, request, render_template
 import os, sys 
+import yfinance as yf
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 
 from Stock_predictions.random_forest_prediction import MLPredictions
 
-from Stock_predictions.predition_random_prices import main 
+from Stock_predictions.predition_random_prices import last_six_months 
 
 app = Flask(__name__)
-
-
 
 """
 the prediction gives a 98% score we should be wary of this 
@@ -24,13 +23,13 @@ def prediction_power():
 
     # ml_pred = MLPredictions()
     # price_pred = ml_pred.random_forest()
-    x,y,z =main()
+    x =last_six_months()
 
 
 
-    print("The prices are ")
+    print("The prices predictions are ")
 
-    return x,y,z 
+    return x
 
 
 if __name__ == '__main__':
