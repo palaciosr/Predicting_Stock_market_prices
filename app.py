@@ -29,7 +29,7 @@ def prediction_power():
 
     print("The prices predictions are ")
 
-    return x
+    return render_template('home.html')
 
 
 if __name__ == '__main__':
