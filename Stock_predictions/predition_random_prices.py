@@ -19,7 +19,7 @@ def last_2wks(min_price_2wks,max_price_2wks):
 
 def actual_prices():
 
-    data = web.DataReader('^GSPC',data_source='yahoo',start='2020-06-08',end='2020-06-11')
+    data = web.DataReader('^GSPC',data_source='yahoo',start='2020-06-08',end='2020-06-12')
 
     print(data['Open'])
 
