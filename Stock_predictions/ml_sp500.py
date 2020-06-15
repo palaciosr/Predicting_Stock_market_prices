@@ -35,7 +35,7 @@ class StockData:
         # self.data = pd.read_csv('../data/sp500.csv')
 
         #we are using the stock data from pandas data reader library to extract data 
-        self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-06-05')
+        self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-06-08')
         self.history_data_pts = 60
         self.look_back = 5
         self.batch_size = 1
@@ -44,12 +44,14 @@ class StockData:
 
     #when using and deep learning techniques we cannot accept the strings 
     #note we can handle this with one-hot encoder 
-    def drop_date(self):
-        pass 
+    def get_date(self):
+         
+        self.data=self.data.reset_index(level=['Date'])
 
-        self.data_no_date = self.data.drop('Date',axis=1)
+
+        return self.data 
+
         
-        return self.data_no_date
 
     #I want to normalize the data in order to get returns and prices 
     #I will include research which shows normal and log normal distributions
@@ -174,14 +176,14 @@ class StockData:
 
         return prediction_list
 
-    def get_dates(self):
+    def get_pred_dates(self):
 
         split_percent =0.8
         num_prediction = 5
 
-        date = self.data['Date']
+        self.data=self.data.reset_index(level=['Date'])
 
-        date = self.data.set_index('Date',inplace=True)
+        date = self.data['Date']
 
         split = int(split_percent*len(date))
 
@@ -198,11 +200,13 @@ class StockData:
 
 stock_data=StockData()
 
-#below will give the future prices and dates 
-
-date=stock_data.get_dates()
-list_prices=stock_data.predict_prices()
-print(list_prices)
-print()
+date=stock_data.get_pred_dates()
 
 print(date)
+print()
+#below will give the future prices and dates 
+
+
+list_prices=stock_data.predict_prices()
+print(list_prices)
+
