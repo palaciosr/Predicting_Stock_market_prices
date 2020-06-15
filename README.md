@@ -4,7 +4,8 @@ This project is an attempt to predict the U.S. S&P 500 index. Simply it is a POC
 
 # Long Term short term memory (LSTM)
 
-This project is to examine what LSTMs can do to predict stock market data. As the term implies, there this deep learning method is designed to be able to model both long term and short term events.
+This project is to examine what LSTMs can do to predict stock market data. As the term implies, there this deep learning method is designed to be able to model both long term and short term events. Deep learning LSTM seems to be the best candidate as of now 
+compared to randomly generating prices. However, it still not accurate when we look at the actual prices.
 
 
 # Research 
