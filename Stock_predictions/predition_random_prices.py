@@ -23,7 +23,7 @@ def actual_prices():
 
     print(data['Open'])
 
-def main():
+def all_pred():
 
     #we get a data with date and prices open close adjusted volume 
     data_6mo = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-06-05')
