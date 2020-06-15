@@ -203,6 +203,6 @@ stock_data=StockData()
 date=stock_data.get_dates()
 list_prices=stock_data.predict_prices()
 print(list_prices)
-
+print()
 
 print(date)
