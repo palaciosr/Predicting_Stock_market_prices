@@ -198,15 +198,15 @@ class StockData:
         return prediction_dates 
       
 
-stock_data=StockData()
+# stock_data=StockData()
 
-date=stock_data.get_pred_dates()
+# date=stock_data.get_pred_dates()
 
-print(date)
-print()
-#below will give the future prices and dates 
+# print(date)
+# print()
+# #below will give the future prices and dates 
 
 
-list_prices=stock_data.predict_prices()
-print(list_prices)
+# list_prices=stock_data.predict_prices()
+# print(list_prices)
 
