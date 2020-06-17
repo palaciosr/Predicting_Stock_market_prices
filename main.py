@@ -2,6 +2,8 @@ from Stock_predictions.predition_random_prices import all_pred
 
 from Stock_predictions.ml_sp500 import StockData
 
+#multi-threading:
+#https://towardsdatascience.com/multithreading-in-python-for-finance-fc1425664e74
 
 stock_data= StockData()
 
