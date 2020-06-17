@@ -1,6 +1,13 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template,redirect,session
 import os, sys 
+import pandas as pd 
 import yfinance as yf
+
+#visualizing
+import simplejson as json
+from bokeh.plotting import figure
+from bokeh.palettes import Spectral11
+from bokeh.embed import components 
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
@@ -25,11 +32,13 @@ def prediction_power():
     # price_pred = ml_pred.random_forest()
     x =last_six_months()
 
-
-
     print("The prices predictions are ")
 
     return render_template('home.html')
+
+@app.route('/graph')
+def graph():
+
 
 
 if __name__ == '__main__':
