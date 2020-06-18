@@ -45,6 +45,7 @@ def graph():
 
     stock = input() = request.form()
 
+#need to use quandl
     stock_df = yf.download(stock, start='2020-01-01',end='2020-05-22')
 
     stock_df =stock_df.reset_index(level=['Date'])
