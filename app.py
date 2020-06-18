@@ -31,7 +31,6 @@ def main():
 
 #api key:
 
-#pSwkUPQr8XpJf4xeFM7S
 
 
 @app.route('/home.html',methods=['GET'])
