@@ -25,6 +25,8 @@ the only way to make money is to forward test I will conduct further research
 
 """
 
+app.vars={}
+
 @app.route('/')
 def main():
     return redirect('home.html')
@@ -39,31 +41,32 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/graph')
+@app.route('/graph',methods=['GET','POST'])
 def graph():
 
+    app.vars['ticker'] = request.form['ticker']
 
-    stock = input() = request.form()
+    # stock_df =stock_df.reset_index(level=['Date'])
 
-#need to use quandl
-    stock_df = yf.download(stock, start='2020-01-01',end='2020-05-22')
-
-    stock_df =stock_df.reset_index(level=['Date'])
+    #attempt to not make an api call
+    app.vars['results'] = yf.download(app.vars['ticker'], start='2020-06-17',end='2020-06-18')
 
 
-    p = figure(title='Stock prices displayed' % stock ,x_axis_label='date',x_axis_type='datetime')
+    script, div = plot.fig(app.vars['results'], app.vars['ticker'])
+    f = open('%s.txt'%(app.vars['ticker']),'w')
+    f.write('Ticker: %s\n'%(app.vars['ticker']))
+    f.close()
 
-    if request.form.get('Close'):
+    # p = figure(title='Stock prices displayed' % stock ,x_axis_label='date',x_axis_type='datetime')
+
+    # if request.form.get('Close'):
         
-        p.line(x=stock_df['Date'].values,y=stock_df['Close'].values,line_width=2,legend="Close")
+    #     p.line(x=stock_df['Date'].values,y=stock_df['Close'].values,line_width=2,legend="Close")
 
 
-    script, div = components(p)
+    # script, div = components(p)
 
     return render_template('graph.html',script=script,div=div)
-
-
-
 
 
 
