@@ -32,15 +32,10 @@ app.vars={}
 def main():
     return redirect('home.html')
 
-#api key:
-
-
-
 @app.route('/home.html',methods=['GET'])
 def home():
 
     return render_template('home.html')
-
 
 @app.route('/graph',methods=['GET','POST'])
 def graph():
@@ -52,20 +47,19 @@ def graph():
     #attempt to not make an api call
     app.vars['results'] = yf.download(app.vars['ticker'], start='2020-06-17',end='2020-06-18')
 
+    print(app.vars['results'])
 
-    script, div = plot.fig(app.vars['results'], app.vars['ticker'])
-    f = open('%s.txt'%(app.vars['ticker']),'w')
-    f.write('Ticker: %s\n'%(app.vars['ticker']))
-    f.close()
 
-    # p = figure(title='Stock prices displayed' % stock ,x_axis_label='date',x_axis_type='datetime')
+    # p = figure(title='Stock prices displayed' % app.vars['ticker'] ,x_axis_label='date',x_axis_type='datetime')
+    p = figure(title='Stock prices displayed' % str(app.vars['ticker']))
 
-    # if request.form.get('Close'):
+
+    if request.form.get('Close'):
         
-    #     p.line(x=stock_df['Date'].values,y=stock_df['Close'].values,line_width=2,legend="Close")
+        p.line(x=stock_df['Date'].values,y=stock_df['Close'].values,line_width=2,legend="Close")
 
 
-    # script, div = components(p)
+    script, div = components(p)
 
     return render_template('graph.html',script=script,div=div)
 
