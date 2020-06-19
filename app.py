@@ -2,6 +2,7 @@ from flask import Flask, request, render_template,redirect,session
 import os, sys 
 import pandas as pd 
 import yfinance as yf
+import plot 
 
 #visualizing
 import simplejson as json
