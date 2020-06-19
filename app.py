@@ -12,10 +12,7 @@ from bokeh.embed import components
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
-
 from Stock_predictions.random_forest_prediction import MLPredictions
-from Stock_predictions.predition_random_prices import last_six_months 
-# from Stock_picking import get_stock_data
 
 app = Flask(__name__)
 
@@ -42,21 +39,21 @@ def graph():
 
     app.vars['ticker'] = request.form['ticker']
 
-    # stock_df =stock_df.reset_index(level=['Date'])
+    stock_df = yf.download(app.vars['ticker'], start='2020-06-17',end='2020-06-18')
+    stock_df =stock_df.reset_index(level=['Date'])
 
     #attempt to not make an api call
-    app.vars['results'] = yf.download(app.vars['ticker'], start='2020-06-17',end='2020-06-18')
+    # app.vars['results'] = yf.download(app.vars['ticker'], start='2020-06-17',end='2020-06-18')
+    # app.vars['results'] = app.vars['results'].reset_index(level=['Date'])
 
-    print(app.vars['results'])
-
-
-    # p = figure(title='Stock prices displayed' % app.vars['ticker'] ,x_axis_label='date',x_axis_type='datetime')
-    p = figure(title='Stock prices displayed' % str(app.vars['ticker']))
-
+    p = figure(title='Stock prices displayed %s' % str(app.vars['ticker']),x_axis_label='date',x_axis_type='datetime')
 
     if request.form.get('Close'):
         
-        p.line(x=stock_df['Date'].values,y=stock_df['Close'].values,line_width=2,legend="Close")
+        p.line(x=stock_df['Date'].values,y=stock_df['Close'].values,line_width=2,legend_label="Close")
+                
+        # p.line(x=app.vars['results']['Date'].values,y=app.vars['results']['Close'].values,line_width=2,legend_label="Close")
+
 
 
     script, div = components(p)
@@ -68,20 +65,3 @@ def graph():
 if __name__ == '__main__':
 
     app.run()
-
-
-
-"""
-#will come last but will  display multiple predictions
-
-# @app.route('/')
-# def prediction_power():
-
-#     # ml_pred = MLPredictions()
-#     # price_pred = ml_pred.random_forest()
-#     x =last_six_months()
-
-#     print("The prices predictions are ")
-
-#     return render_template('home.html')
-"""
