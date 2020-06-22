@@ -10,24 +10,19 @@ stock_data= StockData()
 
 date=stock_data.get_pred_dates()
 
-print("dates and prices from the deep learning model")
-# print(date)
-# print()
-#below will give the future prices and dates 
-
 
 deep_learning_prices=stock_data.predict_prices()
 #numpy array
-list_prices = pd.Series(deep_learning_prices)
+deep_learning_prices = pd.Series(deep_learning_prices)
 # print(deep_learning_prices)
 
 random_last_6mo,random_last_2wks,date,actual_price=all_pred()
+  
+all_prices = pd.DataFrame({'Date':date,'Random_last_2wks':random_last_2wks,
+                            'Random_last_6_months':random_last_6mo,'Deep_learning_prices':deep_learning_prices,
+                            'Actual_prices':actual_price})
 
-#pd.DataFrame({'email':sf.index, 'list':sf.values})
-
-all_prices = pd.DataFrame({'Random_last_6_months':random_last_6mo,'Actual_prices':actual_price})
-
-print(all_prices)
+print(all_prices.head(4))
 
 
 # all_pred()
