@@ -4,3 +4,4 @@ pandas==0.24.2
 pandas-datareader==0.8.1
 numpy==1.16.2
 bokeh==2.1.0
+Keras==2.3.1
