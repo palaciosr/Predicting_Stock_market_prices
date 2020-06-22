@@ -1,27 +1,41 @@
 import random
 import pandas_datareader as web
+import pandas as pd 
 
 #predict for the next five days 
 #week of June 8, 2020
 #this comes from the last 6 months 
 def last_six_months(min_price_6_months,max_price_6_months):
 
+    six_month_price_data = []
+
     for sp500_price in range(4):
 
-        print(random.randrange(int(min_price_6_months), int(max_price_6_months))) 
+        six_month_price_data.append(random.randrange(int(min_price_6_months), int(max_price_6_months)))
+    
+    series_six_month_price_data = pd.Series(six_month_price_data)
 
+    return series_six_month_price_data
 
 def last_2wks(min_price_2wks,max_price_2wks):
 
+    last_2wk_data = []
+
     for sp500_price in range(4):
        
-        print(random.randrange(int(min_price_2wks), int(max_price_2wks))) 
+        last_2wk_data.append(random.randrange(int(min_price_2wks), int(max_price_2wks)))
+
+    series_last_2wk_data = pd.Series(last_2wk_data)
+
+    return series_last_2wk_data
 
 def actual_prices():
 
     data = web.DataReader('^GSPC',data_source='yahoo',start='2020-06-08',end='2020-06-12')
 
-    print(data['Open'])
+    data=data.reset_index(level=['Date'])
+
+    return data['Date'],data['Open']
 
 def all_pred():
 
@@ -50,8 +64,10 @@ def all_pred():
 
     return x,y,z 
 
-# main()
+x,y,z = all_pred()
 
+print(x)
+print(y)
 
 
     
