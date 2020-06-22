@@ -46,7 +46,7 @@ def all_pred():
     max_price_6_months = data_6mo['Open'].max()
 
     #lets get random prices for the next 5 days given the last 6 months
-    print("Prices given the last 6 months randomly")
+    # print("Prices given the last 6 months randomly")
     x=last_six_months(min_price_6_months,max_price_6_months)
     print()
 
@@ -55,7 +55,7 @@ def all_pred():
     min_price_2wks = data_2wks['Open'].min()
     max_price_2wks = data_2wks['Open'].max()
 
-    print("Prices given the last 2 weeks randomly")
+    # print("Prices given the last 2 weeks randomly")
     y=last_2wks(min_price_2wks,max_price_2wks)
     print()
 
