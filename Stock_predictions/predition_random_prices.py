@@ -9,7 +9,7 @@ def last_six_months(min_price_6_months,max_price_6_months):
 
     six_month_price_data = []
 
-    for sp500_price in range(4):
+    for sp500_price in range(5):
 
         six_month_price_data.append(random.randrange(int(min_price_6_months), int(max_price_6_months)))
     
@@ -21,7 +21,7 @@ def last_2wks(min_price_2wks,max_price_2wks):
 
     last_2wk_data = []
 
-    for sp500_price in range(4):
+    for sp500_price in range(5):
        
         last_2wk_data.append(random.randrange(int(min_price_2wks), int(max_price_2wks)))
 
