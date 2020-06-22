@@ -59,15 +59,14 @@ def all_pred():
     y=last_2wks(min_price_2wks,max_price_2wks)
     print()
 
-    print("The actual prices for the prices for the week of June 8, 2020 ")
-    z=actual_prices()
+    # print("The actual prices for the prices for the week of June 8, 2020 ")
+    date,open_price=actual_prices()
 
-    return x,y,z 
+    return x,y,date,open_price
 
-x,y,z = all_pred()
+# x,y,date,open_price=all_pred()
+# print(x,y,date,open_price)
 
-print(x)
-print(y)
 
 
     
