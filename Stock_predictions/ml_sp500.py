@@ -35,7 +35,11 @@ class StockData:
         # self.data = pd.read_csv('../data/sp500.csv')
 
         #we are using the stock data from pandas data reader library to extract data 
-        self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-06-08')
+        #6 months of data
+        # self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-06-08')
+
+        #a bit over 2 months of data
+        self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-04-05',end='2020-06-22')
         self.history_data_pts = 60
         self.look_back = 5
         self.batch_size = 1
