@@ -4,6 +4,8 @@ import pandas as pd
 import yfinance as yf
 import plot 
 
+from main import PredictionsAggregated
+
 #visualizing
 import simplejson as json
 from bokeh.plotting import figure
@@ -25,15 +27,15 @@ the only way to make money is to forward test I will conduct further research
 
 app.vars={}
 
-@app.route('/')
-def main():
-    return redirect('home.html')
-
-@app.route('/home.html',methods=['GET'])
+@app.route('/',methods=['POST','GET'])
 def home():
 
-    return render_template('home.html')
+    pred_prices = PredictionsAggregated().get_price_predictions()
+#titles=pred_prices.columns.values
 
+    return render_template('home.html',tables=[pred_prices.to_html(classes='data')],headers ="true" )
+
+#work in progress just gets price 
 @app.route('/graph',methods=['GET','POST'])
 def graph():
 
