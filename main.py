@@ -5,10 +5,13 @@ import pandas as pd
 #multi-threading:
 #https://towardsdatascience.com/multithreading-in-python-for-finance-fc1425664e74
 
-
-
 """
-
+The following class gets prices in the following manner:
+Dates in the future forward looking
+Randomly generated prices for the previous 2 weeks
+Randomly generated prices for the previous 2 months
+Price prediction with time series generated via deep learning prices
+Last the actual prices
 """
 class PredictionsAggregated:
 
