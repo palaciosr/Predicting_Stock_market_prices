@@ -27,13 +27,13 @@ the only way to make money is to forward test I will conduct further research
 
 app.vars={}
 
-@app.route('/',methods=['POST','GET'])
+pred_prices = PredictionsAggregated().get_price_predictions()
+
+
+@app.route('/')
 def home():
 
-    pred_prices = PredictionsAggregated().get_price_predictions()
-#titles=pred_prices.columns.values
-
-    return render_template('home.html',tables=[pred_prices.to_html(classes='data')],headers ="true" )
+    return render_template('home.html',tables=[pred_prices.to_html(classes='data')],titles=pred_prices.columns)
 
 #work in progress just gets price 
 @app.route('/graph',methods=['GET','POST'])
