@@ -32,20 +32,20 @@ class PredictionsAggregated:
         self.stock_data = StockData(stock)
         self.deep_learning_prices = self.stock_data.predict_prices()
 
-        # self.random_last_6mo,self.random_last_2wks,self.date,self.actual_price = RandomGeneratePrices(stock).all_pred()
-        self.random_last_6mo,self.random_last_2wks = RandomGeneratePrices(stock).all_pred()
+        self.random_last_6mo,self.random_last_2wks,self.date,self.actual_price = RandomGeneratePrices(stock).all_pred()
+        # self.random_last_6mo,self.random_last_2wks = RandomGeneratePrices(stock).all_pred()
 
 
     def get_price_predictions(self):
 
         self.deep_learning_prices = pd.Series(self.deep_learning_prices)
 
-        # all_prices = pd.DataFrame({'Date':self.date,'Random_last_2wks':self.random_last_2wks,
-        #                     'Random_last_6_months':self.random_last_6mo,'Deep_learning_prices_2months':self.deep_learning_prices,
-        #                     'Actual_prices':self.actual_price})
+        all_prices = pd.DataFrame({'Date':self.date,'Random_last_2wks':self.random_last_2wks,
+                            'Random_last_6_months':self.random_last_6mo,'Deep_learning_prices_2months':self.deep_learning_prices,
+                            'Actual_prices':self.actual_price})
 
-        all_prices = pd.DataFrame({'Random_last_2wks':self.random_last_2wks,
-                                'Random_last_6_months':self.random_last_6mo,'Deep_learning_prices_2months':self.deep_learning_prices})
+        # all_prices = pd.DataFrame({'Random_last_2wks':self.random_last_2wks,
+        #                         'Random_last_6_months':self.random_last_6mo,'Deep_learning_prices_2months':self.deep_learning_prices})
 
         return all_prices
 
