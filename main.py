@@ -1,4 +1,4 @@
-from Stock_predictions.predition_random_prices import all_pred 
+from Stock_predictions.predition_random_prices import RandomGeneratePrices 
 from Stock_predictions.ml_sp500 import StockData
 import pandas as pd 
 
@@ -13,23 +13,39 @@ Randomly generated prices for the previous 2 months
 Price prediction with time series generated via deep learning prices
 Last the actual prices
 """
+
+class ChooseStock:
+
+    def get_stock(self):
+
+        stock = input("Please input your favorite stock \n: ")
+        stock =stock.upper()
+        return stock
+
+
 class PredictionsAggregated:
 
     def __init__(self):
-        
-        self.stock_data = StockData()
-        # self.date = self.stock_data.get_pred_dates()
+
+        stock = ChooseStock().get_stock()
+
+        self.stock_data = StockData(stock)
         self.deep_learning_prices = self.stock_data.predict_prices()
-        self.random_last_6mo,self.random_last_2wks,self.date,self.actual_price = all_pred()
+
+        # self.random_last_6mo,self.random_last_2wks,self.date,self.actual_price = RandomGeneratePrices(stock).all_pred()
+        self.random_last_6mo,self.random_last_2wks = RandomGeneratePrices(stock).all_pred()
 
 
     def get_price_predictions(self):
 
         self.deep_learning_prices = pd.Series(self.deep_learning_prices)
 
-        all_prices = pd.DataFrame({'Date':self.date,'Random_last_2wks':self.random_last_2wks,
-                            'Random_last_6_months':self.random_last_6mo,'Deep_learning_prices_2months':self.deep_learning_prices,
-                            'Actual_prices':self.actual_price})
+        # all_prices = pd.DataFrame({'Date':self.date,'Random_last_2wks':self.random_last_2wks,
+        #                     'Random_last_6_months':self.random_last_6mo,'Deep_learning_prices_2months':self.deep_learning_prices,
+        #                     'Actual_prices':self.actual_price})
+
+        all_prices = pd.DataFrame({'Random_last_2wks':self.random_last_2wks,
+                                'Random_last_6_months':self.random_last_6mo,'Deep_learning_prices_2months':self.deep_learning_prices})
 
         return all_prices
 
