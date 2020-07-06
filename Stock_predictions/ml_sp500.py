@@ -38,9 +38,9 @@ class StockData:
         # 2 months of data
         # self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-04-05',end='2020-06-22')
 
-        self.data = web.DataReader(stock,data_source='yahoo',start='2020-04-05',end='2020-06-22')
+        self.data = web.DataReader(stock,data_source='yahoo',start='2020-04-05',end='2020-06-05')
         self.history_data_pts = 60
-        self.look_back = 5
+        self.look_back = 4
         self.batch_size = 1
         self.scaler = MinMaxScaler(feature_range=(0,1))
         self.model = Sequential()
@@ -151,7 +151,7 @@ class StockData:
 #do prediction on 
     def predict_prices(self):
 
-        num_prediction = 5
+        num_prediction = 4
 
 
         # data_no_date = StockData().drop_date()
