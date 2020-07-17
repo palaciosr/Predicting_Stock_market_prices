@@ -23,7 +23,7 @@ api = info_api_alpaca()
 
 
 #check if market is open
-def check_market_open():
+def check_market_open(api):
 
     clock = api.get_clock()
     if clock.is_open:
@@ -52,23 +52,27 @@ def sell_strat(positions,api):
 
         if x >0.0 or  x<0.005:
             print("no change")
+            return False
         elif x<-0.02 or x<-0.001:
             print(" selling loss")
             api.submit_order(str(position.symbol),qty,"sell","market","gtc") # Market order to fully close position
             print("selling",position.symbol)
+            return True
         elif x>=0.01:
             print("start selling")
             api.submit_order(str(position.symbol),qty,"sell","market","gtc") # Market order to fully close position
             print("selling",position.symbol)
+            return True
         else:
             pass 
+            return False
 
 #checking the prices
 def check_prices(new_cash_bal,assetsToTrade,api):
 
     # can change time as desired 
     # "1H" # 1Min, 5Min, 15Min, 1H, 1D
-    barTimeframe = "1H"
+    barTimeframe = "5min"
 
     open_list = []
     timeList = []
@@ -116,8 +120,10 @@ def buy_strat(assetsToTrade,openList,closeList,api):
                 stock_acq=api.submit_order(assetsToTrade[asset],targetPositionSize,"buy","market","gtc") # Market order to open position
                 bought_stock.append(stock_acq)
                 print("buying",asset)
+            return True 
         else:
             pass
+            return False 
 
 def main():
 
@@ -138,7 +144,7 @@ def main():
     positions = api.list_positions()
 
     #check open/close return boolean
-    is_market_open = check_market_open()
+    is_market_open = check_market_open(api)
 
     #need to thread as limit is 200 API requests 1hr chunks fixes the problem for now
 
@@ -146,9 +152,17 @@ def main():
 
        openList,closeList =check_prices(cashBalance,assetsToTrade,api)
 
-       sell_strat(positions,api)
+       x=sell_strat(positions,api)
         #need listss
-       buy_strat(assetsToTrade,openList,closeList,api)
+       y=buy_strat(assetsToTrade,openList,closeList,api)
+
+       while not x or not y:
+          openList,closeList =check_prices(cashBalance,assetsToTrade,api)
+
+          x =sell_strat(positions,api)
+          y=buy_strat(assetsToTrade,openList,closeList,api)
+
+
     
     else:
         print("market is closed")
