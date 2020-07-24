@@ -25,13 +25,13 @@ class StockData(Base):
     volume = Column(Integer,unique=True)
 
 
-engine = create_engine('sqlite:///:memory:', echo = True)
+# engine = create_engine('sqlite:///:memory:', echo = True)
 
-# file_name = 'new_stock_data/' + listdir('new_stock_data')[0]
+file_name = 'new_stock_data/' + listdir('new_stock_data')[0]
+
+new_data = StockData().get_stock_data()
 
 Base.metadata.create_all(engine)
-
 Session = sessionmaker(bind = engine)
-
 session = Session()
 
