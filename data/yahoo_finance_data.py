@@ -1,12 +1,15 @@
 import sqlite3
-import os 
-from datetime import datetime
-from app import db   
+import pandas as pd 
+import yfinance as yf 
 
-class Config:
+class StockData:
 
-    def create_db(self):
+    def __init__(self):
+        
+        self.stock = '^GSPC'
 
-        #create the database for sp500 
-        conn = sqlite3.connect('sp500.db')
+    def get_stock_data(self):
+        
+        df_stock = yf.download(self.stock,period='5d',interval='30m')
 
+        return df_stock
