@@ -1,3 +1,4 @@
+import sqlalchemy
 from sqlalchemy import Column, ForeignKey, Float, String, Integer
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -25,13 +26,29 @@ class StockData(Base):
     volume = Column(Integer,unique=True)
 
 
-# engine = create_engine('sqlite:///:memory:', echo = True)
-
+# seperation of db initiation
 file_name = 'new_stock_data/' + listdir('new_stock_data')[0]
 
+#holds stock df 
 new_data = StockData().get_stock_data()
 
-Base.metadata.create_all(engine)
+
+database_location = "sqlite:///stock_db.sqlite"
+engine = sqlalchemy.create_engine(database_location)
+
 Session = sessionmaker(bind = engine)
 session = Session()
 
+for stock_info in new_data.to_dict(orient='records'):
+    
+    stock_data = StockData(
+        open = stock_info['Open'],
+        close = stock_info['Close'],
+        high = stock_info['High'],
+        low = stock_info['Low'],
+        adj_close = stock_info['Adj. Close'],
+        volume = stock_info['Volume'])
+
+    session.add(stock_data)
+    
+session.commit()
