@@ -18,6 +18,11 @@ def info_api_alpaca():
     print(account.status)
 
     return api
+#TODO
+#tests  to run check that the account is active 
+#check the stocks choosen are avaialble to trade 
+#check if market is open /weekends/weekdays 
+#check api requests
 
 api = info_api_alpaca()
 
