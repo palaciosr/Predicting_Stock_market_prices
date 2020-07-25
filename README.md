@@ -2,6 +2,9 @@
 
 This project is an attempt to predict the U.S. S&P 500 index. Simply it is a POC on the performance of long term short term memory deep learning algorithimns. I use the historical prices of the S&P 500 index, and see the performance. Note this for now May 3, 2020 is only using prices and volume. There are more features to add along with a frontend as well.
 
+# Assumptions 
+I will not be creating an API to consume rather I will consume yahoo finance API consume to get the following: Open, High, Low, Adj. Close, Volume. Similarly, for deep learning techniques I will be using exisiting frameworks, as those open source produce good enough results for the testing purposes I need.
+
 # Running this module 
 There are  two ways to run this module, clone it.Once that is done,then, assuming you have python 3.0 and pip installed, do bash run.sh. Otherwise, do a pip install -r requirements.txt main.py. You can also after installing the dependencies, run python app.py to display to your local host. Note this section requires input before it outputs anything you would have to choose a stock of your choosing such as MSFT as it stands you have to input the stock ticker twice (will be enabled and disabled with development, but ideally will only need to be inputted once in the future).
 
