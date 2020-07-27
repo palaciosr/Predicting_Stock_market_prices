@@ -33,7 +33,6 @@ class PredictionsAggregated:
         self.deep_learning_prices = self.stock_data.predict_prices()
 
         self.random_last_6mo,self.random_last_2wks,self.date,self.actual_price = RandomGeneratePrices(stock).all_pred()
-        # self.random_last_6mo,self.random_last_2wks = RandomGeneratePrices(stock).all_pred()
 
 
     def get_price_predictions(self):
@@ -44,11 +43,10 @@ class PredictionsAggregated:
                             'Random_last_6_months':self.random_last_6mo,'Deep_learning_prices_2months':self.deep_learning_prices,
                             'Actual_prices':self.actual_price})
 
-        # all_prices = pd.DataFrame({'Random_last_2wks':self.random_last_2wks,
-        #                         'Random_last_6_months':self.random_last_6mo,'Deep_learning_prices_2months':self.deep_learning_prices})
-
+        
         return all_prices
 
+#code below is to check without the use of Flask  app.py
 pred_prices = PredictionsAggregated().get_price_predictions()
 
 print(pred_prices.head(4))
