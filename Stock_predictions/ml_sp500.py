@@ -31,12 +31,8 @@ class StockData:
 
     def __init__(self,stock):
 
-        #uncommnet if you want a large data set from 1998-2020 
+        #uncomment  if you want the  date range from 1998-2020 
         # self.data = pd.read_csv('../data/sp500.csv')
-
-
-        # 2 months of data
-        # self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-04-05',end='2020-06-22')
 
         self.data = web.DataReader(stock,data_source='yahoo',start='2020-04-05',end='2020-06-05')
         self.history_data_pts = 60
@@ -45,8 +41,8 @@ class StockData:
         self.scaler = MinMaxScaler(feature_range=(0,1))
         self.model = Sequential()
 
-    #when using and deep learning techniques we cannot accept the strings 
-    #note we can handle this with one-hot encoder 
+
+    #Date was an index changing it into a column
     def get_date(self):
          
         self.data=self.data.reset_index(level=['Date'])
@@ -60,6 +56,7 @@ class StockData:
     #I will include research which shows normal and log normal distributions
     # for returns and price fluctations 
     def normalize_data(self):
+        
 
         data_no_date = StockData().drop_date()
         data_normalizer = preprocessing.MinMaxScaler()
