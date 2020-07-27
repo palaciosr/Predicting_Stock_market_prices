@@ -3,14 +3,18 @@ import pandas_datareader as web
 import pandas as pd
 
 
-#predict for the next five days 
-#week of June 8, 2020
-#this comes from the last 6 months 
+"""
+This class uses the native python random number generator
+to get the stock prices for the specified dates :
+
+It predict for the next five days 
+week of June 8, 2020
+using the past 2 weeks and 6 months 
+"""
 class RandomGeneratePrices:
 
     def __init__(self,stock):
         
-        # self.stock = ChooseStock().get_stock()
 
         self.actual_prices = web.DataReader(stock,data_source='yahoo',start='2020-06-08',end='2020-06-12')
     #we get a data with date and prices open close adjusted volume 
