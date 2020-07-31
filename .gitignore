@@ -1,3 +1,6 @@
 __pycache__/
 
 /Stock_predictions/__pycache__/
+
+/Stock_predictions/__pycache__/ml_sp500.cpython-37.pyc
+/Stock_predictions/__pycache__/predition_random_prices.cpython-37.pyc
