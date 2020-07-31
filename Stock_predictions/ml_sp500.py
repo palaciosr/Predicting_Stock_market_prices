@@ -33,8 +33,8 @@ class StockData:
 
         #uncomment  if you want the  date range from 1998-2020 
         # self.data = pd.read_csv('../data/sp500.csv')
-
         self.data = web.DataReader(stock,data_source='yahoo',start='2020-04-05',end='2020-06-05')
+        self.stock = stock
         self.history_data_pts = 60
         self.look_back = 4
         self.batch_size = 1
@@ -43,6 +43,14 @@ class StockData:
 
 
     #Date was an index changing it into a column
+    def check_stock_exisits(self):
+
+        try:
+            self.data 
+        except KeyError:
+            print("This input is not valid")
+
+
     def get_date(self):
          
         self.data=self.data.reset_index(level=['Date'])
