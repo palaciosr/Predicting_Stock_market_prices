@@ -21,11 +21,6 @@ class ChooseStock:
         stock = input("Please input your favorite stock \n: ")
         stock =stock.upper()
 
-        try:
-            stock 
-        except KeyError:
-            print("This input is not valid")
-
         return stock
 
 
