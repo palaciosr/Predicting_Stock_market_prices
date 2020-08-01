@@ -47,8 +47,10 @@ class StockData:
 
         try:
             self.data 
+            return True
         except KeyError:
             print("This input is not valid")
+            return False
 
 
     def get_date(self):
