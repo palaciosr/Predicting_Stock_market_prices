@@ -16,6 +16,8 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 from Stock_predictions.random_forest_prediction import MLPredictions
 
+from Stock_predictions.ml_sp500 import StockData
+
 app = Flask(__name__)
 
 """
@@ -25,8 +27,7 @@ the only way to make money is to forward test I will conduct further research
 
 """
 
-app.vars={}
-
+#used for getting a dataframe displayed
 pred_prices = PredictionsAggregated().get_price_predictions()
 
 
@@ -35,34 +36,32 @@ def home():
 
     return render_template('home.html',tables=[pred_prices.to_html(classes='data')],titles=pred_prices.columns)
 
-#work in progress just gets price 
+
+def stock_chosen_by_user(stock,start,end):
+
+    data = yf.download(stock,data_source='yahoo',start=start,end=end)
+
+    # df_prices_pred= StockData(data).predict_prices()
+
+    return data 
+
+def pred_prices():
+
+    pass 
+
 @app.route('/graph',methods=['GET','POST'])
 def graph():
 
-    app.vars['ticker'] = request.form['ticker']
 
-    stock_df = yf.download(app.vars['ticker'], start='2020-06-17',end='2020-06-18')
-    stock_df =stock_df.reset_index(level=['Date'])
+    if request.method == 'POST':
 
-    #attempt to not make an api call
-    # app.vars['results'] = yf.download(app.vars['ticker'], start='2020-06-17',end='2020-06-18')
-    # app.vars['results'] = app.vars['results'].reset_index(level=['Date'])
+        stock = request.form['companyname']
+        start = request.form['startdate']
+        end = request.form['enddate']
 
-    p = figure(title='Stock prices displayed %s' % str(app.vars['ticker']),x_axis_label='date',x_axis_type='datetime')
+        df = stock_chosen_by_user(stock,start,end)
 
-    if request.form.get('Close'):
-        
-        p.line(x=stock_df['Date'].values,y=stock_df['Close'].values,line_width=2,legend_label="Close")
-                
-        # p.line(x=app.vars['results']['Date'].values,y=app.vars['results']['Close'].values,line_width=2,legend_label="Close")
-
-
-
-    script, div = components(p)
-
-    return render_template('graph.html',script=script,div=div)
-
-
+    # stock_df =stock_df.reset_index(level=['Date'])
 
 if __name__ == '__main__':
 
