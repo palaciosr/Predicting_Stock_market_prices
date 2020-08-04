@@ -47,7 +47,6 @@ class PredictionsAggregated:
         
         return all_prices
 
-#code below is to check without the use of Flask  app.py
-pred_prices = PredictionsAggregated().get_price_predictions()
-
-print(pred_prices.head(4))
+#code below is as a standalone module without Flask
+# pred_prices = PredictionsAggregated().get_price_predictions()
+# print(pred_prices.head(4))
