@@ -9,15 +9,18 @@ from sklearn.model_selection import train_test_split
 
 """
 with this class I will back test the data with random forest 
+which much like a decision tree,except a lot decison trees  put together
+I will feed in the data from the Flask app 
 
 """
 
 class MLPredictions:
 
-    def __init__(self):
+    def __init__(self,data):
 
-        #start with 4 months of data 
-        self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-05-07')
+        # self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-05-07')
+
+        self.data = data 
 
     #this method splits the data to  get 
     def data_split(self):
@@ -44,19 +47,20 @@ class MLPredictions:
         #the closer we are to one the better the prediction 
         get_score= regression.score(X_test,y_test)
 
-        return get_score 
+        return prediction 
 
         #would have to work with the max depth as there are not lots of features as of now 
 
 
-# ml_pred= MLPredictions()
 
 """
 the prediction gives a 98% score we should be wary of this 
 It is important to note that this is a backtest as opposed to a forward test 
 the only way to make money is to forward test I will conduct further research
-
+Uncomment below to test as a standalone module 
 """
+# ml_pred= MLPredictions()
+
 # x= ml_pred.random_forest()
 
 # print(x)
