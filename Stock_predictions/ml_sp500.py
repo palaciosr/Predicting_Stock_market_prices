@@ -33,8 +33,7 @@ class StockData:
 
         #uncomment  if you want the  date range from 1998-2020 
         # self.data = pd.read_csv('../data/sp500.csv')
-        # self.data = web.DataReader(stock,data_source='yahoo',start='2020-04-05',end='2020-06-05')
-        self.data = stock
+        self.data = web.DataReader(stock,data_source='yahoo',start='2020-04-05',end='2020-06-05')
         self.history_data_pts = 60
         self.look_back = 4
         self.batch_size = 1
