@@ -45,11 +45,14 @@ def stock_chosen_by_user(stock,start,end):
 
     return data 
 
-def pred_prices():
+# def pred_prices():
 
-    pass 
+    # rf = MLPredictions(data)
+    # random_forest_prediction = rf.random_forest()
 
-@app.route('/graph',methods=['GET','POST'])
+    # return rf 
+
+@app.route('/plot',methods=['GET','POST'])
 def graph():
 
 
@@ -60,8 +63,20 @@ def graph():
         end = request.form['enddate']
 
         df = stock_chosen_by_user(stock,start,end)
+        original_end = df['Close'][-1]
+
+        rf = MLPredictions(df)
+        forecast_start = rf
+
+        #wil return a series of the close
+        random_forest_prediction = rf.random_forest()
 
     # stock_df =stock_df.reset_index(level=['Date'])
+
+    # return render_template("plot.html",original = round(original_end,2),forecast=round(forecast_start,2),stock_tinker=stock.upper())
+
+    return render_template("plot.html",stock_tinker=stock.upper())
+
 
 if __name__ == '__main__':
 
