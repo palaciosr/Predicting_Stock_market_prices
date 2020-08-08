@@ -6,5 +6,6 @@ COPY requirements.txt requirements.txt
 
 # WORKDIR /Stock_predictions
 RUN pip install -r requirements.txt
-ENTRYPOINT ["python"]
-CMD ["main.py"]
+
+# ENTRYPOINT ["python"]
+CMD ["python","main.py"]
