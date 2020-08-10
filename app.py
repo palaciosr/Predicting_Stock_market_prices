@@ -18,6 +18,8 @@ from Stock_predictions.random_forest_prediction import MLPredictions
 
 from Stock_predictions.ml_sp500 import StockData
 
+from main import PredictionsAggregated
+
 app = Flask(__name__)
 
 """
@@ -29,7 +31,7 @@ the only way to make money is to forward test I will conduct further research
 
 #used for getting a dataframe displayed
 pred_prices = PredictionsAggregated().get_price_predictions()
-
+print(pred_prices.head(5))
 
 @app.route('/')
 def home():
@@ -62,14 +64,14 @@ def graph():
         start = request.form['startdate']
         end = request.form['enddate']
 
-        df = stock_chosen_by_user(stock,start,end)
-        original_end = df['Close'][-1]
+    df = stock_chosen_by_user(stock,start,end)
+    original_end = df['Close'][-1]
 
-        rf = pred_prices(df)
-        forecast_start = rf
+    rf = pred_prices(df)
+    forecast_start = rf
 
-        #wil return a series of the close
-        random_forest_prediction = rf.random_forest()
+    #wil return a series of the close
+    random_forest_prediction = rf.random_forest()
 
     # stock_df =stock_df.reset_index(level=['Date'])
 
