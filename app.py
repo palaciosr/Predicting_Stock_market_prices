@@ -29,21 +29,29 @@ the only way to make money is to forward test I will conduct further research
 
 """
 
-#used for getting a dataframe displayed
-pred_prices = PredictionsAggregated().get_price_predictions()
-print(pred_prices.head(5))
+
+def forward_pred():
+    #used for getting a dataframe displayed
+    pred_prices = PredictionsAggregated().get_price_predictions()
+    # print(pred_prices.head(5))
+
+    return pred_prices
+
+@app.route('/forward_predictions')
+def home():
+
+    pred_prices = forward_pred()
+
+    return render_template('forward_predictions.html',tables=[pred_prices.to_html(classes='data')],titles=pred_prices.columns)
 
 @app.route('/')
 def home():
 
-    return render_template('home.html',tables=[pred_prices.to_html(classes='data')],titles=pred_prices.columns)
-
+    return render_template("index.html")
 
 def stock_chosen_by_user(stock,start,end):
 
     data = yf.download(stock,data_source='yahoo',start=start,end=end)
-
-    # df_prices_pred= StockData(data).predict_prices()
 
     return data 
 
@@ -55,8 +63,7 @@ def pred_prices(data):
     return rf 
 
 @app.route('/plot',methods=['GET','POST'])
-def graph():
-
+def main():
 
     if request.method == 'POST':
 
@@ -64,20 +71,20 @@ def graph():
         start = request.form['startdate']
         end = request.form['enddate']
 
-    df = stock_chosen_by_user(stock,start,end)
-    original_end = df['Close'][-1]
+        df = stock_chosen_by_user(stock,start,end)
+        original_end = df['Close'][-1]
 
-    rf = pred_prices(df)
-    forecast_start = rf
+        rf = pred_prices(df)
+        forecast_start = rf
 
-    #wil return a series of the close
-    random_forest_prediction = rf.random_forest()
+        #wil return a series of the close
+        random_forest_prediction = rf.random_forest()
 
-    # stock_df =stock_df.reset_index(level=['Date'])
+    # return render_template('plot.html',stock_tinker=stock)
 
-    # return render_template("plot.html",original = round(original_end,2),forecast=round(forecast_start,2),stock_tinker=stock.upper())
 
-    return render_template("plot.html",stock_tinker=stock.upper())
+    return render_template("plot.html",original = round(original_end,2),forecast=round(forecast_start,2),stock_tinker=stock.upper())
+
 
 
 if __name__ == '__main__':
