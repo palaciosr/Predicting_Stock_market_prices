@@ -5,7 +5,7 @@ import sklearn
 from sklearn import preprocessing
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
-
+import yfinance as yf
 
 """
 with this class I will back test the data with random forest 
@@ -18,7 +18,6 @@ class MLPredictions:
 
     def __init__(self,data):
 
-        # self.data = web.DataReader('^GSPC',data_source='yahoo',start='2020-01-05',end='2020-05-07')
 
         self.data = data 
 
@@ -51,7 +50,8 @@ class MLPredictions:
 
         #would have to work with the max depth as there are not lots of features as of now 
 
-
+#test case 
+#consider case of having too little data 
 
 """
 the prediction gives a 98% score we should be wary of this 
@@ -59,7 +59,27 @@ It is important to note that this is a backtest as opposed to a forward test
 the only way to make money is to forward test I will conduct further research
 Uncomment below to test as a standalone module 
 """
-# ml_pred= MLPredictions()
+
+#used for testing purposes
+
+
+# print("input stock")
+# stock = input()
+# print()
+
+# print("start input date yy=mm-dd")
+# start = input()
+# print()
+
+# print("end input date yy=mm-dd")
+
+# end = input()
+# print()
+
+
+# data = yf.download(stock,start=start,end=end)
+
+# ml_pred= MLPredictions(data)
 
 # x= ml_pred.random_forest()
 
