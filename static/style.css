@@ -10,8 +10,8 @@ video {
   .searchbox
   {
       position: absolute;
-      top: 45%;
-      left: 48%;
+      top: 25%;
+      left: 15%;
       transform: translate(-50%,-50%);
       width: 345px;
       height: 50px;
@@ -28,8 +28,8 @@ video {
   .submit
   {
       position: absolute;
-      top: 45%;
-      left: 63%;
+      top: 24%;
+      left: 70%;
       transform: translate(-50%,-50%);
       width: 95px;
       height: 50px;
@@ -41,6 +41,48 @@ video {
       font-size: 18px;
       font-family: Comic Sans MS;
   }
+  
+  .start_box
+  {
+      position: absolute;
+      top: 25%;
+      left: 35%;
+      transform: translate(-50%,-50%);
+      width: 345px;
+      height: 50px;
+      box-sizing: border-box;
+      background: rgba(0,0,0,.5);
+      outline: none;
+      color: black;
+      font-weight: ;
+      color: white;
+      font-size: 18px;
+      font-family: Comic Sans MS;
+  }
+  
+  
+  
+  
+  .end_box
+  {
+      position: absolute;
+      top: 25%;
+      left: 55%;
+      transform: translate(-50%,-50%);
+      width: 345px;
+      height: 50px;
+      box-sizing: border-box;
+      background: rgba(0,0,0,.5);
+      outline: none;
+      color: white;
+      font-weight: ;
+      color: white;
+      font-size: 18px;
+      font-family: Comic Sans MS;
+  }
+  
+  
+  
   
   .homepage
   {
@@ -65,3 +107,4 @@ video {
       font-size: 18px;
       text-decoration: none;
   }
+  
