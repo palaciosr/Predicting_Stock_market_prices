@@ -81,7 +81,7 @@ def main():
 
     # return render_template("plot.html",original = round(original_end,2),forecast=round(forecast_start,2),stock_tinker=stock.upper())
 
-    return render_template("plot.html",original = original_end,forecast=forecast_start,stock_tinker=stock.upper())
+    return render_template("plot.html",original = original_end,forecast=random_forest_prediction[-1],stock_tinker=stock.upper())
 
 
 
