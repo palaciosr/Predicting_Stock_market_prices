@@ -38,7 +38,7 @@ def forward_pred():
     return pred_prices
 
 @app.route('/forward_predictions')
-def home():
+def forward_predictions():
 
     pred_prices = forward_pred()
 
