@@ -4,7 +4,6 @@ import pandas as pd
 import yfinance as yf
 import plot 
 
-from main import PredictionsAggregated
 
 #visualizing
 import simplejson as json
@@ -16,9 +15,9 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 from Stock_predictions.random_forest_prediction import MLPredictions
 
-from Stock_predictions.ml_sp500 import StockData
+# from Stock_predictions.ml_sp500 import StockData
 
-from main import PredictionsAggregated
+# from main import PredictionsAggregated
 
 app = Flask(__name__)
 
@@ -80,10 +79,10 @@ def main():
         #wil return a series of the close
         random_forest_prediction = rf.random_forest()
 
-    # return render_template('plot.html',stock_tinker=stock)
+    # return render_template("plot.html",original = round(original_end,2),forecast=round(forecast_start,2),stock_tinker=stock.upper())
 
+    return render_template("plot.html",original = original_end,forecast=forecast_start,stock_tinker=stock.upper())
 
-    return render_template("plot.html",original = round(original_end,2),forecast=round(forecast_start,2),stock_tinker=stock.upper())
 
 
 
