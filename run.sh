@@ -1,6 +1,6 @@
 
 pip install  -r requirements.txt
-python main.py 
+python app.py 
 
 
 # pip3 install --user -r requirements.txt
