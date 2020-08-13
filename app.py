@@ -2,14 +2,9 @@ from flask import Flask, request, render_template,redirect,session
 import os, sys 
 import pandas as pd 
 import yfinance as yf
-import plot 
 
 
 #visualizing
-import simplejson as json
-from bokeh.plotting import figure
-from bokeh.palettes import Spectral11
-from bokeh.embed import components 
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
