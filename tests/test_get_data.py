@@ -18,3 +18,6 @@ assert isinstance(stock,pd.DataFrame)
 data = StockData.check_stock_exisits()
 
 assert data == True
+
+#test for flask 
+#https://www.patricksoftwareblog.com/unit-testing-a-flask-application/
