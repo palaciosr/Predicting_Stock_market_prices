@@ -13,7 +13,7 @@ from Stock_predictions.random_forest_prediction import MLPredictions
 
 # from Stock_predictions.ml_sp500 import StockData
 
-# from main import PredictionsAggregated
+from main import PredictionsAggregated
 
 app = Flask(__name__)
 
