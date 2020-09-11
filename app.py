@@ -2,6 +2,7 @@ from flask import Flask, request, render_template,redirect,session
 import os, sys 
 import pandas as pd 
 import yfinance as yf
+from datetime import date, timedelta
 
 
 #visualizing
@@ -43,7 +44,11 @@ def home():
 
     return render_template("index.html")
 
-def stock_chosen_by_user(stock,start,end):
+def stock_chosen_by_user(stock):
+
+    
+    start = date.today() - timedelta(90)
+    end = date.today() + timedelta(1)
 
     data = yf.download(stock,data_source='yahoo',start=start,end=end)
 
@@ -62,10 +67,9 @@ def main():
     if request.method == 'POST':
 
         stock = request.form['companyname']
-        start = request.form['startdate']
-        end = request.form['enddate']
+        
 
-        df = stock_chosen_by_user(stock,start,end)
+        df = stock_chosen_by_user(stock)
         original_end = df['Close'][-1]
 
         rf = pred_prices(df)
@@ -74,7 +78,6 @@ def main():
         #wil return a series of the close
         random_forest_prediction = rf.random_forest()
 
-    # return render_template("plot.html",original = round(original_end,2),forecast=round(forecast_start,2),stock_tinker=stock.upper())
 
     return render_template("plot.html",original = original_end,forecast=random_forest_prediction[-1],stock_tinker=stock.upper())
 
