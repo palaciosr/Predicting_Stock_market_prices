@@ -1,5 +1,5 @@
 import random
-import pandas_datareader as web
+import yfinance as yf
 import pandas as pd
 
 
@@ -16,11 +16,11 @@ class RandomGeneratePrices:
     def __init__(self,stock):
         
 
-        self.actual_prices = web.DataReader(stock,data_source='yahoo',start='2020-06-08',end='2020-06-12')
+        self.actual_prices = yf.download(stock,data_source='yahoo',start='2020-06-08',end='2020-06-12')
     #we get a data with date and prices open close adjusted volume 
-        self.data_6mo = web.DataReader(stock,data_source='yahoo',start='2020-01-05',end='2020-06-05')
+        self.data_6mo = yf.download(stock,data_source='yahoo',start='2020-01-05',end='2020-06-05')
 
-        self.data_2wks = web.DataReader(stock,data_source='yahoo',start='2020-05-03',end='2020-06-05')
+        self.data_2wks = yf.download(stock,data_source='yahoo',start='2020-05-03',end='2020-06-05')
 
         self.stock = stock
 
