@@ -5,14 +5,10 @@ import yfinance as yf
 from datetime import date, timedelta
 
 
-#visualizing
-
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 from Stock_predictions.random_forest_prediction import MLPredictions
-
 # from Stock_predictions.ml_sp500 import StockData
-
 from main import PredictionsAggregated
 
 app = Flask(__name__)
@@ -28,7 +24,6 @@ the only way to make money is to forward test I will conduct further research
 def forward_pred():
     #used for getting a dataframe displayed
     pred_prices = PredictionsAggregated().get_price_predictions()
-    # print(pred_prices.head(5))
 
     return pred_prices
 
@@ -65,18 +60,26 @@ def pred_prices(data):
 def main():
 
     if request.method == 'POST':
+        x = False
 
-        stock = request.form['companyname']
-        
+        while x:
 
-        df = stock_chosen_by_user(stock)
-        original_end = df['Close'][-1]
+            try:
+                stock = request.form['companyname']
+                df = stock_chosen_by_user(stock)
 
-        rf = pred_prices(df)
-        forecast_start = rf
+                x = True
 
-        #wil return a series of the close
-        random_forest_prediction = rf.random_forest()
+            except TypeError:
+                print("This is stock does not exist")
+
+            
+            original_end = df['Close'][-1]
+            rf = pred_prices(df)
+            forecast_start = rf
+
+            #will return a series of the close
+            random_forest_prediction = rf.random_forest()
 
 
     return render_template("plot.html",original = original_end,forecast=random_forest_prediction[-1],stock_tinker=stock.upper())
