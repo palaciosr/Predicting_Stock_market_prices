@@ -20,7 +20,6 @@ the only way to make money is to forward test I will conduct further research
 
 """
 
-
 def forward_pred():
     #used for getting a dataframe displayed
     pred_prices = PredictionsAggregated().get_price_predictions()
@@ -60,31 +59,19 @@ def pred_prices(data):
 def main():
 
     if request.method == 'POST':
-        x = False
 
-        while x:
-
-            try:
-                stock = request.form['companyname']
-                df = stock_chosen_by_user(stock)
-
-                x = True
-
-            except TypeError:
-                print("This is stock does not exist")
+        stock = request.form['companyname']
+        df = stock_chosen_by_user(stock)
 
             
-            original_end = df['Close'][-1]
-            rf = pred_prices(df)
-            forecast_start = rf
+        original_end = df['Close'][-1]
+        rf = pred_prices(df)
+        forecast_start = rf
 
-            #will return a series of the close
-            random_forest_prediction = rf.random_forest()
-
+        #will return a series of the close
+        random_forest_prediction = rf.random_forest()
 
     return render_template("plot.html",original = original_end,forecast=random_forest_prediction[-1],stock_tinker=stock.upper())
-
-
 
 
 if __name__ == '__main__':
