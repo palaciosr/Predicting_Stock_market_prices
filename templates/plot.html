@@ -4,7 +4,7 @@
     <title> Dashboard </title>
     <script src="../static/js/dygraph.js"></script>
     <link rel="stylesheet" href="../static/style_result.css">
-    <link rel="stylesheet" href="../static/css/dygraph.css"/>
+    <!-- <link rel="stylesheet" href="../static/css/dygraph.css"/> -->
 </head>
 
 <body class = "bodyclass" >
@@ -12,7 +12,7 @@
         <a href="/" class = "homepage" style="color:White" >Stock Price Prediction</a>
     </div>
     <h6>
-        <object class = "summary" data="../static/summary/{{stock_tinker}}.txt" style="width:85%; height:40%;" ></object>
+        <!-- <object class = "summary" data="../static/summary/{{stock_tinker}}.txt" style="width:85%; height:40%;" ></object> -->
     </h6>
     <table class="print_details" align="center" >
         <tr>
@@ -80,7 +80,7 @@
     g2 = new Dygraph(
                      document.getElementById("graph"),
                      // CSV or path to a CSV file.
-                     "{{ url_for('static', filename='numbers.csv') }}", // path to CSV file
+                    //  "{{ url_for('static', filename='numbers.csv') }}", // path to CSV file
                      {
                      visibility: [true, true],
                      labelsDiv: document.getElementById("graphLegend")
