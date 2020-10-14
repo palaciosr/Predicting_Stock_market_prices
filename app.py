@@ -44,7 +44,13 @@ def stock_chosen_by_user(stock):
     start = date.today() - timedelta(90)
     end = date.today() + timedelta(1)
 
-    data = yf.download(stock,data_source='yahoo',start=start,end=end)
+    try:
+
+        data = yf.download(stock,data_source='yahoo',start=start,end=end)
+
+    except TypeError:
+
+        data = ''
 
     return data 
 
@@ -58,10 +64,18 @@ def pred_prices(data):
 @app.route('/plot',methods=['GET','POST'])
 def main():
 
+    error = None
+
     if request.method == 'POST':
 
         stock = request.form['companyname']
         df = stock_chosen_by_user(stock)
+
+        if not stock:
+            error = 'This stock does not exists'
+
+        if error:
+            return render_template("index.html",error=error)
 
             
         original_end = df['Close'][-1]
