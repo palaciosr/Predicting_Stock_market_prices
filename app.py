@@ -71,11 +71,7 @@ def main():
         stock = request.form['companyname']
         df = stock_chosen_by_user(stock)
 
-        if not stock:
-            error = 'This stock does not exists'
-
-        if error:
-            return render_template("index.html",error=error)
+       
 
             
         original_end = df['Close'][-1]
